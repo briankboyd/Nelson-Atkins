@@ -1,0 +1,6 @@
+*.log
+app/config
+node_modules
+.idea
+.project
+.settings

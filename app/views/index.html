@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Nelson-Atkins</title>
+
+  <!--[if lt IE 10]> <html class="ie_ten"><![endif]-->
+
+  <!--initial-scale=1 = device reports correct screen size,  maximum-scale=1 = prevents zooming -->
+  <meta name="viewport" content="width=device-width, initial-scale = 1, maximum-scale = 1">
+  <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600'>
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+<body>
+  <div class="header_wrapper">
+    <header>
+      <h1>Payton Reed Boyd</h1>
+    </header>
+  </div>
+
+  <div class="container" id="img_container">
+
+    {% for image in images.items %}
+      {% if loop.index0 < 10 %}
+        {% include "images.html" %}
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+
+<script src="js/lib/jquery.min.js"></script>
+<script src="js/lib/underscore-min.js"></script>
+<script src="js/lib/backbone-min.js"></script>
+</body>
+</html>

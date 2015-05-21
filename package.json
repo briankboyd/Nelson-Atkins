@@ -4,7 +4,7 @@
   "private": false,
   "description": " The one stop shop for your image gallery. Put your shuttle cock up for display for your loved ones to enjoy.",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app/server.js"
   },
   "repository": {
     "type": "git",

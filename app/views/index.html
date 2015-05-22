@@ -21,7 +21,7 @@
   </div>
 
   <div class="container" id="img_container">
-
+<!--loop through the images, only render the first couple for performance reasons-->
     {% for image in images.items %}
       {% if loop.index0 < 10 %}
         {% include "images.html" %}
@@ -34,5 +34,6 @@
 <script src="js/lib/jquery.min.js"></script>
 <script src="js/lib/underscore-min.js"></script>
 <script src="js/lib/backbone-min.js"></script>
+<script src="js/gallery/index.js"></script>
 </body>
 </html>

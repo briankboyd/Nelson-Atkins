@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var http = require('http');
-var routes = require('./routes/index');
+var indexRoute = require('./routes/index');
+var imageRoute = require('./routes/image');
 var app = express();
 var port = process.env.PORT || 6969;
 var server = http.createServer(app);
@@ -24,12 +25,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './public')));
-app.use('/', routes);
+
+//set global object to pass around image json data
+app.set('imageJSON', {imageJSON: ''});
+
+//index route
+app.use('/', indexRoute);
+//serve up image json data
+app.get('/images', imageRoute.images);
 
 //set port
 app.set('port', port);
-//server init
 
+//server init
 server.listen(port, function() {
   console.log('Listening on port ' + port);
 });

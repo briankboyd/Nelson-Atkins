@@ -38,10 +38,10 @@ indexRoute.get('/', function(req, res) {
           el.theImg = splitThumbnail
         });
         //render the html template
-        res.render('index.html', {images: resp} );
+        res.render('index.html', {images: resp.items} );
 
-        //populate the global setttings variable with the json response
-        res.app.settings.imageJSON = {images: resp};
+        //populate the global settings variable with the json response
+        res.app.settings.imageJSON = {images: resp.items};
       }
     });
   });

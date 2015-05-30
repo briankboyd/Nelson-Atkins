@@ -14,6 +14,7 @@
 
 </head>
 <body>
+<div id="app">
   <div class="header_wrapper">
     <header>
       <h1>Payton Reed Boyd</h1>
@@ -21,8 +22,8 @@
   </div>
 
   <div class="container" id="img_container">
-
-    {% for image in images.items %}
+<!--loop through the images, only render the first couple for performance reasons-->
+    {% for image in images %}
       {% if loop.index0 < 10 %}
         {% include "images.html" %}
       {% endif %}
@@ -30,9 +31,36 @@
 
   </div>
 
+</div>
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/lib/underscore-min.js"></script>
+  <script src="js/lib/backbone-min.js"></script>
+  <script src="js/gallery/index.js"></script>
+  <script src="js/gallery/base.js"></script>
+  <script src="js/gallery/images.js"></script>
 
-<script src="js/lib/jquery.min.js"></script>
-<script src="js/lib/underscore-min.js"></script>
-<script src="js/lib/backbone-min.js"></script>
+  <script type="template/backbone" id="img-list-view">
+    <div class="box">
+      <div class="img_holster effect__click" style="background-image: url(<%= theImg %>);">
+        <div class="front">
+        </div>
+
+        <div class="back">
+          <p><%= title %></p>
+          <p>Picture taken on </p>
+          <p>Picture uploaded on <%= createdDate %></p>
+          <p><%= description %></p>
+        </div>
+      </div>
+    </div>
+  </script>
+<!--<%=Gallery.imageListView.imageMediaMetadata.date%>-->
+<!--Start app on document ready-->
+  <script>
+    $(function(){
+      Gallery.start();
+    });
+  </script>
+
 </body>
 </html>

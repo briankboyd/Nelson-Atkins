@@ -1,7 +1,6 @@
 var express = require('express');
-var router = express.Router();
+var indexRoute = express.Router();
 
-// var request = require('request');
 var googleapis = require('googleapis');
 var drive = googleapis.drive('v2');
 var OAuth2 = googleapis.auth.OAuth2;
@@ -12,7 +11,7 @@ var CLIENT_ID = config.CLIENT_ID;
 var SERVICE_ACCOUNT_KEY_FILE = config.SERVICE_ACCOUNT_KEY_FILE;
 var SCOPE = config.SCOPE;
 
-router.get('/', function(req, res) {
+indexRoute.get('/', function(req, res) {
 
   var jwt = new googleapis.auth.JWT(
     SERVICE_ACCOUNT_EMAIL,
@@ -38,11 +37,14 @@ router.get('/', function(req, res) {
           splitThumbnail = splitThumbnail[0] + '=w1890-h820';
           el.theImg = splitThumbnail
         });
+        //render the html template
+        res.render('index.html', {images: resp.items} );
 
-        res.render('index.html', {images: resp} ); //
+        //populate the global settings variable with the json response
+        res.app.settings.imageJSON = {images: resp.items};
       }
     });
   });
 });
 
-module.exports = router;
+module.exports = indexRoute;

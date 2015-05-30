@@ -1,60 +1,35 @@
 
 'use strict';
 
-var Gallery = Gallery || {};
+var Gallery = Gallery || {
+    init : function() {
+      //instantiate new collection
+      Gallery.imageCollection = new Gallery.ImagesCollection();
+      //call the async fetch function and on success create a new list view passing in the object literal collection
 
-Gallery.ImageModel = Backbone.Model.extend({
+      Gallery.imageListView = new Gallery.ImageListView({ collection : Gallery.imageCollection });
+      Gallery.imageCollection.fetch();
 
-});
+    //  Gallery.imageCollection.fetch({
+    //    success : function(coll, resp, options) {
+    //      Gallery.imageListView = new Gallery.ImageListView({collection : Gallery.imageCollection});
+    //      Gallery.imageListView.render();
+    //    },
+    //
+    //    error : function(coll, resp, options) {
+    //      console.log('Ohh Noooo');
+    //    }
+    //  });
+    },
 
-Gallery.ImagesCollection = Backbone.Collection.extend({
-  model: Gallery.ImageModel,
-  url: '/images'
+    start : function() {
+      Gallery.init();
+    }
+  };
 
-});
 
-//var images = new Gallery.ImagesCollection();
-//images.fetch().then(function() {
-//  console.log(images.toJSON());
-//});
 
-Gallery.AppView = Backbone.View.extend({
 
-  el : '#img_container',
-  render : function() {
-    var template = $("#img-list-view").html();
-    var compiled = _.template(template, this.model.toJSON());
-    this.$el.html(compiled);
-    return this;
-  }
-});
-
-Gallery.ImageListView = Backbone.View.extend({
-  initialize : function() {
-    this.collection.bind('reset', this.render, this);
-  },
-
-  render: function() {
-    var els = [];
-    this.collection.each(function(item) {
-      var appView = new Gallery.AppView({ model : item });
-      els.push(appView.render().el);
-    });
-    $(this.el).html(els);
-  }
-});
-
-var imageCollection = new Gallery.ImagesCollection();
-imageCollection.fetch({
-  success : function(coll, resp, options) {
-    var imageListView = new Gallery.ImageListView({collection : imageCollection});
-    imageListView.render();
-  },
-
-  error : function(coll, resp, options) {
-    console.log('Ohh Noooo');
-  }
-});
 
 
 

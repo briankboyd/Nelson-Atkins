@@ -1,5 +1,6 @@
 *.log
-app/config/
+app/config/*
+!app/config/README.md
 node_modules
 .idea
 .project

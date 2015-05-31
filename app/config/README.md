@@ -1,3 +1,9 @@
+#Configuration Folder
+
+##Create 2 files, config.js and pem.key
+
+config.js will look like the following
+```javascript
 var config = {
     folderID: '',
     SERVICE_ACCOUNT_EMAIL: '@developer.gserviceaccount.com',
@@ -8,3 +14,4 @@ var config = {
 }
 
 module.exports = config;
+```
